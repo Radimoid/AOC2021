@@ -6,7 +6,7 @@ namespace AOC2021
     {
         static void Main(string[] args)
         {
-            new Day02().PartTwo();
+            new Day03().PartTwo();
         }
     }
 }
