@@ -37,6 +37,14 @@ namespace AOC2021 {
             return StrsToInts(ReadLines(input));
         }
 
+        public static int[] ParsIntsByWhiteSpace(string line) {
+            string[] splited = line.Split(new[] { ' ' }, System.StringSplitOptions.RemoveEmptyEntries);
+            int[] ret = new int[splited.Length];
+            for (int i = 0; i < ret.Length; i++)
+                ret[i] = int.Parse(splited[i].Trim());
+            return ret;
+        }
+
         public static int[] ParseIntsLine(string line, char splitter = ',') {
             string[] splited = line.Split(splitter);
             int[] ret = new int[splited.Length];
