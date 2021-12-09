@@ -176,6 +176,17 @@ namespace AOC2021 {
                 }
             }
             return ret;
-        }      
+        }  
+        
+        static public int[,] ReadDigitMap(string path) {
+            string[] lines = ReadLines(path);
+            int rows = lines.Length;
+            int cols = lines[0].Length;
+            int[,] ret = new int[rows, cols];
+            for (int row = 0; row < rows; row++)
+                for (int col = 0; col < cols; col++)
+                    ret[row, col] = lines[row][col] - '0';
+            return ret;
+        }
     }
 }
