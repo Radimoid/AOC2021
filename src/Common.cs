@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Numerics;
+using System;
 
 namespace AOC2021 {
     class Common {
@@ -187,6 +188,15 @@ namespace AOC2021 {
                 for (int col = 0; col < cols; col++)
                     ret[row, col] = lines[row][col] - '0';
             return ret;
+        }
+
+        static public void WriteDigitMap(int[,] map) {
+            for (int row = 0; row < map.GetLength(0); row++) {
+                for (int col = 0; col < map.GetLength(0); col++) {
+                    Console.Write(map[row, col].ToString());
+                }
+                Console.WriteLine();
+            }
         }
     }
 }
