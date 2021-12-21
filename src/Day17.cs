@@ -148,20 +148,10 @@ namespace AOC2021 {
             y2 = int.Parse(match.Groups[4].Value);
         }
                 
-        int GetYtop(int vy) {
-            return ((vy * vy) + vy) / 2;
+        int GetYtop(int vy0) {
+            return ((vy0 * vy0) + vy0) / 2;
         }
-
-        int GetY(int vy0, int n) {
-            return vy0 * n - (n * (n - 1)) / 2;
-        }
-                       
-        int GetX(int vx0, int n) {
-            if (n > vx0)
-                n = vx0;
-            return GetY(vx0, n);
-        }
-
+                
         public void PartOne() {             
             int ymax = Math.Max(Math.Abs(y1), Math.Abs(y2));
             int ytop = GetYtop(ymax - 1);
@@ -170,31 +160,33 @@ namespace AOC2021 {
 
         public void PartTwo() {
             int cnt = 0;
-            for (int x = x1; x <= x2; x++) {
-                for (int n = 1; n < x; n++) {
-                    int vx0 = x + (n * (n - 1)) / 2;                    
-                    if (vx0 % n == 0) {
-                        vx0 /= n;
-                        for (int y = y1; y <= y2; y++) {
-                            int vy0 = y + (n * (n - 1)) / 2;
-                            if (vy0 % n == 0) {
-                                vy0 /= n;
+            int vy0max = Math.Abs(y1);
 
-                                // kontrola, protože neumím lépe vymyslet podmínku pro kontrolu vx == 0
-                                int xCheck = GetX(vx0, n);
-                                int yCheck = GetY(vy0, n);
-                                if (xCheck >= x1 && xCheck <= x2 && yCheck >= y1 && yCheck <= y2) {
-                                    cnt++;
-                                    //Console.WriteLine(vx0 + ", " + vy0);                                    
-                                }
-                                else {
-                                    //Console.WriteLine(vx0 + ", " + vy0 + ", " + xCheck + ", " + yCheck + ", " + n);
-                                }                               
-                            }
+            for (int vx0 = 1; vx0 <= x2; vx0++) {
+                for (int vy0 = y1; vy0 <= vy0max; vy0++) {
+                    int x = 0;
+                    int y = 0;
+                    int vx = vx0;
+                    int vy = vy0;
+                    while (true) {
+                        x += vx;
+                        y += vy;
+                        if (x > x2)
+                            break;
+                        if (y < y1)
+                            break;
+                        if (x >= x1 && y <= y2) {
+                            cnt++;
+                            break;
                         }
+
+                        vy--;
+                        if (vx > 0)
+                            vx--;
                     }
                 }
-            }
+            } 
+
             Console.WriteLine(cnt);
         }
     }
