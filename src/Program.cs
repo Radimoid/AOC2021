@@ -6,7 +6,7 @@ namespace AOC2021
     {
         static void Main(string[] args)
         {
-            var solver = new Day19();
+            var solver = new Day20();
             solver.PartOne();
             solver.PartTwo();
         }
